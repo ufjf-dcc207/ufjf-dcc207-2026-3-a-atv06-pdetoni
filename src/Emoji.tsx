@@ -1,6 +1,8 @@
 import './Emoji.css'
 
-const EMOJI_MAP = new Map<String, string>([
+type EMOJI_KEYS = "happy" | "sick" | "dead"
+
+const EMOJI_MAP = new Map<EMOJI_KEYS, string>([
     ["happy", "😁"],
     ["sick", "😣"],
     ["dead", "😵"]
