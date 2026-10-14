@@ -17,6 +17,7 @@ export default function Emoji(){
     const [energia, setEnergia] = useState<number>(4)
     const [comida, setComida] = useState<number>(2)
     const [agua, setAgua] = useState<number>(1)
+    const [luz, setLuz] = useState<boolean>(true)
 
     function alimentarClick(){
         setComida(Math.min(5, comida+1));
@@ -27,25 +28,27 @@ export default function Emoji(){
     }
 
     function alternarLuzClick(){
-        console.log("Status:", status);
-        console.log("Dead!");
-        setStatus("dead");
-        console.log("Status:", status);
+       setLuz(!luz);
     }
 
     function cicleClick(){
-        switch(status){
-            case "happy":
-                setStatus("sick");
-                break;
-            case "sick":
-                setStatus("dead");
-                break;
-            case "dead":
-                setStatus("happy");
-                break;
-            default:
-                setStatus("happy");
+
+        setComida(Math.max(0, energia-1));
+        if(comida==0){
+            setVida(Math.max(0, vida-1))
+        }
+
+        setAgua(Math.max(0, agua-1))
+        if(agua == 0 ){
+            setVida((prevVida)=>Math.max(0, prevVida-1))
+        }
+        if(luz){
+            setEnergia(Math.max(0, energia-1))
+            if (energia === 0){
+                setVida((prevVida)=>Math.max(0, prevVida-1))
+            }
+        } else {
+            setEnergia(Math.min(5, energia+1))
         }
     }
 
@@ -62,11 +65,12 @@ export default function Emoji(){
                 <Atributo icone="🔋" valor={energia}/>
                 <Atributo icone="💧" valor={agua}/>
                 <Atributo icone="🍗" valor={comida}/>
+                {luz && "💡"}
             </div>
             <div className='acoes'>
                 <button onClick={alimentarClick}>Alimentar</button>
                 <button onClick={hidratarClick}>Hidratar</button>
-                <button onClick={alternarLuzClick}>Ligar luz</button>
+                <button onClick={alternarLuzClick}>{luz? 'Desligar luz' : 'Ligar luz'}</button>
                 <button onClick={cicleClick}>Cicle</button>
             </div>
         </div>
