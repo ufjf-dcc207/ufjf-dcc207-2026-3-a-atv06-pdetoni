@@ -38,25 +38,26 @@ export default function Emoji(){
     }
 
     function cicleClick(){
-        // if(vida===0) return;
+        if(emoji.vida===0) return;
 
-        // setComida(Math.max(0, energia-1));
-        // if(comida==0){
-        //     setVida(Math.max(0, vida-1))
-        // }
+        setEmoji((prevEmoji)=>({...prevEmoji, comida: Math.max(0, prevEmoji.comida -1) as AtributoType}));
+        if(emoji.comida===0){
+            setEmoji((prevEmoji)=>({...prevEmoji, vida: Math.max(0, prevEmoji.vida -1) as AtributoType}));
+        }
 
-        // setAgua(Math.max(0, agua-1))
-        // if(agua == 0 ){
-        //     setVida((prevVida)=>Math.max(0, prevVida-1))
-        // }
-        // if(luz){
-        //     setEnergia(Math.max(0, energia-1))
-        //     if (energia === 0){
-        //         setVida((prevVida)=>Math.max(0, prevVida-1))
-        //     }
-        // } else {
-        //     setEnergia(Math.min(5, energia+1))
-        // }
+        setEmoji((prevEmoji)=>({...prevEmoji, agua: Math.max(0, prevEmoji.agua -1) as AtributoType}));
+        if(emoji.agua===0){
+           setEmoji((prevEmoji)=>({...prevEmoji, vida: Math.max(0, prevEmoji.vida -1) as AtributoType}));
+        }
+
+        if(emoji.luz){
+            setEmoji((prevEmoji)=>({...prevEmoji, energia: Math.max(0, prevEmoji.energia -1) as AtributoType}));
+            if (emoji.energia === 0){
+                setEmoji((prevEmoji)=>({...prevEmoji, vida: Math.max(0, prevEmoji.vida -1) as AtributoType}));
+            }
+        } else {
+            setEmoji((prevEmoji)=>({...prevEmoji, energia: Math.min(5, prevEmoji.energia +1) as AtributoType}));
+        }
     }
 
     console.log("Desenhando...");
