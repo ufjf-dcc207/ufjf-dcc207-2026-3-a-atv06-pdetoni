@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Emoji.css'
 import Atributo from './Atributo';
-import { EMOJI_MAP, type EmojiType } from './types';
+import { EMOJI_MAP, type AtributoType, type EmojiType } from './types';
 
 
 
@@ -19,17 +19,22 @@ export default function Emoji(){
     
 
     function alimentarClick(){
-        // if(vida===0) return;
-        // setComida(Math.min(5, comida+1));
+        if(emoji.vida===0) return;
+        console.log(emoji.comida);
+        const novoEmoji = structuredClone(emoji);
+        novoEmoji.comida = (Math.min(5, emoji.comida+1)) as AtributoType;
+        console.log(emoji.comida);
+
+        setEmoji(novoEmoji);
     }
 
     function hidratarClick(){
-        // if(vida===0) return;
-        // setAgua(Math.min(5, agua+1))
+        if(emoji.vida===0) return;
+        setEmoji({...emoji, agua: Math.min(5, emoji.agua +1) as AtributoType});
     }
 
     function alternarLuzClick(){
-    //    setLuz(!luz);
+        setEmoji({...emoji, luz: !emoji.luz});
     }
 
     function cicleClick(){
